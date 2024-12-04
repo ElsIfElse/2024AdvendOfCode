@@ -1,5 +1,4 @@
-export const input =
-`74 76 78 79 76
+export const input =`74 76 78 79 76
 38 40 43 44 44
 1 2 4 6 8 9 13
 65 68 70 72 75 76 81
@@ -1000,4 +999,5 @@ export const input =
 47 50 53 54 57 58 60 61
 59 58 55 53 52`
 
-console.log(input.split('\n'));
+
+// console.log(input.split('\n'));
