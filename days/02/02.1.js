@@ -29,21 +29,20 @@ export const parseStringArrayToIntArray = function(stringArray){
 }
 
 export const checkIfNumbersAreIncreasingOrDecrasingByTwo = function(array){
-    let result;
+    let result
     let increasing;
-
-    if(array[0]<array[1]){
+    let falseArray = [];
+    if(array[0] < array[1]){
         increasing = true;
     }
     else{
         increasing = false;
     }
-
     for(let i = 0; i < array.length-1; i++){
-        if(increasing && array[i+1] === array[i]+1 || array[i+1] === array[i]+2 || array[i+1] === array[i]+3){
+        if(increasing && (array[i+1] === array[i]+1 || array[i+1] === array[i]+2 || array[i+1] === array[i]+3)){
             result = true
         }
-        else if( !increasing && array[i+1] === array[i]-1 || array[i+1] === array[i]-2 || array[i+1] === array[i]-3){
+        else if( !increasing && (array[i+1] === array[i]-1 || array[i+1] === array[i]-2 || array[i+1] === array[i]-3)){
             result = true
         } 
         else{
@@ -67,3 +66,5 @@ export const countTrueFalseLines = function(arr){
     }
     return [trueLines,falseLines];
 }
+
+
