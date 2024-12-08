@@ -4,14 +4,22 @@
   "main": "01.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "node index.js",
-    "nodemon": "nodemon index.js"
+    "watch": "node ./dist/index2.js",
+    "build":"tsc",
+    "start": "npm run build && nodemon ./dist/index2.js",
+    "dev":"tsc --watch"
+
   },
-  "type": "module",
+  "type": "commonjs",
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
   }
 }

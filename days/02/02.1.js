@@ -32,12 +32,16 @@ export const checkIfNumbersAreIncreasingOrDecrasingByTwo = function(array){
     let result
     let increasing;
     let falseArray = [];
+
+    // Checking if array is increasing or decreasing
     if(array[0] < array[1]){
         increasing = true;
     }
     else{
         increasing = false;
     }
+
+    // Checking if arrays are increasing/decreasing by maximum 3
     for(let i = 0; i < array.length-1; i++){
         if(increasing && (array[i+1] === array[i]+1 || array[i+1] === array[i]+2 || array[i+1] === array[i]+3)){
             result = true
@@ -45,8 +49,14 @@ export const checkIfNumbersAreIncreasingOrDecrasingByTwo = function(array){
         else if( !increasing && (array[i+1] === array[i]-1 || array[i+1] === array[i]-2 || array[i+1] === array[i]-3)){
             result = true
         } 
+
+        // If they increase/decrease with more than 1 or 3 then they are false reports
         else{
-            return false
+            // Collecting false reports so I can send it to a function to be spliced
+            // falseArray,push(array[i])
+             
+            // Use a function to splice the arrays and then make a recursive call on them and somehow mark them as double checked so they are not checked forever.
+            return false 
         }
     }
     return result
