@@ -1,7 +1,10 @@
+// Day3.1
+
+
 const getStrings = function(stringInput:string){
     const reg:RegExp = /mul\(\d{1,3},\d{1,3}\)/g
         const collection:string[] | null= stringInput.match(reg);
-        return collection; 
+        return collection
 }
 
 const getNumbersFromStrings = function(stringArray:string[] | any){
@@ -23,11 +26,41 @@ const multiplyTwoNumbers = function(numArr:number[][]){
 
 export const day3MainFunction = function(string:string){
     const pickedOutStrings: string[] | any = getStrings(string)
-    console.log("picked out strings: "+pickedOutStrings)
     const numberArrays:number[][] = getNumbersFromStrings(pickedOutStrings);
     const result:number = multiplyTwoNumbers(numberArrays);
     return result;
 }
+ 
 
+// Day3.2
 
+const getDosAndDonts = function(inputString:string){
+    const firstRegex:RegExp = /^.*?don't/
+    const firstFind:string[] | null = inputString.match(firstRegex)
 
+    const secondRegex:RegExp = /do(?!n).*?(?=don't)/g
+    const middlePart:string[] | null = inputString.match(secondRegex);
+
+    const thirdRegex:RegExp = /(do(?!n)).*/ 
+    const end:string[] | null = inputString.match(thirdRegex)
+
+    let resultArray:string[] = [...(firstFind ?? []),...(middlePart ?? []),...end ?? []] 
+    // let resultArray:string[] = [...(firstFind ?? [])] 
+    // let resultArray:string[] = [...(end ?? [])] 
+
+    console.log("First: ",firstFind)
+    console.log("Second: ",middlePart)   
+    console.log("End: ",end)
+    const result:string = resultArray.join()
+
+    console.log("Summary: ",result)  
+    return result 
+}
+
+export const day3MainFunction2 = function(string:string){
+    const doDontString:string | null = getDosAndDonts(string)
+    const pickedOutStrings: string[] | null = getStrings(doDontString)
+    const numberArrays:number[][] = getNumbersFromStrings(pickedOutStrings);
+    const result:number = multiplyTwoNumbers(numberArrays);
+    return result;
+}
