@@ -35,25 +35,28 @@ export const day3MainFunction = function(string:string){
 // Day3.2
 
 const getDosAndDonts = function(inputString:string){
+    // Getting first part of text until the first don't
     const firstRegex:RegExp = /^.*?don't/
     const firstFind:string[] | null = inputString.match(firstRegex)
 
+    // Getting the middle part of the text and returnin all text pieces that are between do and don't
     const secondRegex:RegExp = /do(?!n).*?(?=don't)/g
     const middlePart:string[] | null = inputString.match(secondRegex);
 
+    // Getting the last part of the text from the last do until the end
     const thirdRegex:RegExp = /(do(?!n)).*/ 
     const end:string[] | null = inputString.match(thirdRegex)
 
+    // Summarizing all text pieces collected
     let resultArray:string[] = [...(firstFind ?? []),...(middlePart ?? []),...end ?? []] 
-    // let resultArray:string[] = [...(firstFind ?? [])] 
-    // let resultArray:string[] = [...(end ?? [])] 
 
     console.log("First: ",firstFind)
     console.log("Second: ",middlePart)   
     console.log("End: ",end)
-    const result:string = resultArray.join()
 
+    const result:string = resultArray.join()
     console.log("Summary: ",result)  
+
     return result 
 }
 
