@@ -32,44 +32,59 @@ const makeStringArrayInto2dArray = function(stringArrayInput:string[]){
 
 // Creating all coordinate possibilites
 const lookForX = function(stringArray2dInput:string[][]){
+    let sum = 0;
     for(let i = 0; i < stringArray2dInput.length;i++){
         for(let j = 0;j < stringArray2dInput[i].length;j++){
 
             // Check if iterated element is X and if it is then send it to check if it can move around
             if(stringArray2dInput[i][j] == "X"){ 
-                lookWhereIsSpace(i,j,stringArray2dInput[i].length,stringArray2dInput.length)
+                sum += lookWhereIsSpace(i,j,stringArray2dInput[i].length,stringArray2dInput.length,stringArray2dInput)
             }
 
         }
     }
+    console.log(sum);
+    
 }
 
 
-const lookWhereIsSpace = function(y:number,x:number,xLength:number,yLength:number){
+const lookWhereIsSpace = function(y:number,x:number,xLength:number,yLength:number,array:string[][]){
 
     // if x <= 2 then it cannot look to the left.
     // if x > array.length-3 then it cannot look on the right
     // if y <= 2  it cannot look upwards
     // if y > array.length-3  it cannot look downwards
 
-    if(canGoLeft(x)){
-        
-    } 
-
+    let summaryNum:number = 0;
     const up:boolean = canGoUpwards(y)
     const down:boolean = canGoDownwards(y,yLength);
 
-
+    const left:boolean = canGoLeft(x)
     const right:boolean = canGoRight(x,xLength)
 
     const upLeft:boolean = canGoLeftUp(left,up);
-    const upRigh:boolean = canGoRightUp(right,up);
+    const upRight:boolean = canGoRightUp(right,up);
 
     const downLeft:boolean = canGoLeftDown(left,down);
     const downRight:boolean = canGoRightDown(right,down);
 
-    console.log(downLeft)
+    // if(left){
+    //     summaryNum += goingLeft(y,x,array)
+    // }
+    // if(right){
+    //     summaryNum += goingRigth(y,x,array)
+    // }
+     if(up){
+        summaryNum += goingUp(y,x,array)
+    }
+    // if(down){
+    //     summaryNum += goingDown(y,x,array)
+    // }
+    else{
+        console.log("mathches nothing")
+    }
 
+    return summaryNum
 }
 
 // Checking which ones can be valid so the word "XMAS" can possibly fit towards a certain direction
@@ -121,6 +136,45 @@ const canGoRightDown = function(right:boolean,down:boolean){
     }
     return false;
 }
-const goingLeft = function(){
 
+// Checking if the following letters towards the valid paths are correct or not
+const goingLeft = function(y:number,x:number,array:string[][]){
+    if(array[y][x-1] === "M" && array[y][x-2] === "A" && array[y][x-3] === "S"){
+        console.log("Match")
+        return 1
+    }
+    else{
+        console.log("Does not match");
+        return 0
+    }
+}
+const goingRigth = function(y:number,x:number,array:string[][]){
+    if(array[y][x+1] === "M" && array[y][x+2] === "A" && array[y][x+3] === "S"){
+        console.log("Match");
+        return 1
+    }
+    else{
+        console.log("Does not match");
+        return 0
+    }
+}
+const goingUp = function(y:number,x:number,array:string[][]){
+    if(array[y+1][x] === "M" && array[y+2][x] === "A" && array[y+3][x] === "S"){
+        console.log("Match");
+        return 1
+    } 
+    else{
+        console.log("Does not match");
+        return 0
+    }
+}
+const goingDown= function(y:number,x:number,array:string[][]){
+    if(array[y-1][x] === "M" && array[y-2][x] === "A" && array[y-3][x] === "S"){
+        console.log("Match");
+        return 1
+    }
+    else{
+        console.log("Does not match");
+        return 0
+    }
 }
