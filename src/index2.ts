@@ -26,6 +26,7 @@ MXMXAXMASX`
 // console.log(b)
 
 // day 4.1
-console.log(day4MainFunction(exampleStringDay4))
-
+const day04Result:number = day4MainFunction(exampleStringDay4)
+console.log(day04Result) 
+ 
 

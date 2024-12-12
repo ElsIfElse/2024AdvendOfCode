@@ -2,7 +2,7 @@ export const day4MainFunction = function(stringInput:string){
     const stringArray:string[] =  makeStringIntoArray(stringInput);
     const stringArray2d:string[][] = makeStringArrayInto2dArray(stringArray);
     const a = lookForX(stringArray2d);
-    // return stringArray2d
+    return a
 }
 
 // Making array into lines of arrays
@@ -32,7 +32,7 @@ const makeStringArrayInto2dArray = function(stringArrayInput:string[]){
 
 // Creating all coordinate possibilites
 const lookForX = function(stringArray2dInput:string[][]){
-    let sum = 0;
+    let sum:number = 0;
     for(let i = 0; i < stringArray2dInput.length;i++){
         for(let j = 0;j < stringArray2dInput[i].length;j++){
 
@@ -43,8 +43,7 @@ const lookForX = function(stringArray2dInput:string[][]){
 
         }
     }
-    console.log(sum);
-    
+    return sum;
 }
 
 
@@ -68,20 +67,33 @@ const lookWhereIsSpace = function(y:number,x:number,xLength:number,yLength:numbe
     const downLeft:boolean = canGoLeftDown(left,down);
     const downRight:boolean = canGoRightDown(right,down);
 
-    // if(left){
-    //     summaryNum += goingLeft(y,x,array)
-    // }
-    // if(right){
-    //     summaryNum += goingRigth(y,x,array)
-    // }
-     if(up){
+    if(left){
+        summaryNum += goingLeft(y,x,array)
+    }
+    if(right){
+        summaryNum += goingRigth(y,x,array)
+    }
+    if(up){
         summaryNum += goingUp(y,x,array)
     }
-    // if(down){
-    //     summaryNum += goingDown(y,x,array)
-    // }
+    if(down){
+        summaryNum += goingDown(y,x,array)
+    }
+
+    if(upLeft){
+        summaryNum += goingUpLeft(y,x,array)
+    }
+    if(upRight){
+        summaryNum += goingUpRight(y,x,array)
+    }
+    if(downRight){
+        summaryNum += goingDownRight(y,x,array)
+    }
+    if(downLeft){
+        summaryNum += goingDownLeft(y,x,array)
+    }
     else{
-        console.log("mathches nothing")
+        return summaryNum
     }
 
     return summaryNum
@@ -101,7 +113,7 @@ const canGoRight = function(x:number,xLength:number){
     return true;
 }
 const canGoUpwards = function(y:number){
-    if(y<=2){
+    if(y<=3){
         return false;
     }
     return true;
@@ -140,41 +152,65 @@ const canGoRightDown = function(right:boolean,down:boolean){
 // Checking if the following letters towards the valid paths are correct or not
 const goingLeft = function(y:number,x:number,array:string[][]){
     if(array[y][x-1] === "M" && array[y][x-2] === "A" && array[y][x-3] === "S"){
-        console.log("Match")
         return 1
     }
     else{
-        console.log("Does not match");
         return 0
     }
 }
 const goingRigth = function(y:number,x:number,array:string[][]){
     if(array[y][x+1] === "M" && array[y][x+2] === "A" && array[y][x+3] === "S"){
-        console.log("Match");
         return 1
     }
     else{
-        console.log("Does not match");
         return 0
     }
 }
 const goingUp = function(y:number,x:number,array:string[][]){
-    if(array[y+1][x] === "M" && array[y+2][x] === "A" && array[y+3][x] === "S"){
-        console.log("Match");
+        if(array[y-1][x] === "M" && array[y-2][x] === "A" && array[y-3][x] === "S"){
         return 1
     } 
     else{
-        console.log("Does not match");
         return 0
     }
 }
 const goingDown= function(y:number,x:number,array:string[][]){
-    if(array[y-1][x] === "M" && array[y-2][x] === "A" && array[y-3][x] === "S"){
-        console.log("Match");
+    if(array[y+1][x] === "M" && array[y+2][x] === "A" && array[y+3][x] === "S"){
         return 1
     }
     else{
-        console.log("Does not match");
+        return 0
+    }
+}
+const goingUpRight= function(y:number,x:number,array:string[][]){
+    if(array[y-1][x+1] === "M" && array[y-2][x+2] === "A" && array[y-3][x+3] === "S"){
+        return 1
+    }
+    else{
+        return 0
+    }
+}
+const goingUpLeft= function(y:number,x:number,array:string[][]){
+    if(array[y-1][x-1] === "M" && array[y-2][x-2] === "A" && array[y-3][x-3] === "S"){
+        return 1
+    }
+    else{
+        return 0
+    }
+}
+const goingDownRight= function(y:number,x:number,array:string[][]){
+    if(array[y+1][x+1] === "M" && array[y+2][x+2] === "A" && array[y+3][x+3] === "S"){
+        return 1
+    }
+    else{
+        return 0
+    }
+}
+const goingDownLeft= function(y:number,x:number,array:string[][]){
+    if(array[y+1][x+1] === "M" && array[y+2][x+2] === "A" && array[y+3][x+3] === "S"){
+        return 1
+    }
+    else{
         return 0
     }
 }
