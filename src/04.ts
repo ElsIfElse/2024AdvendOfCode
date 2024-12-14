@@ -30,7 +30,7 @@ const makeStringArrayInto2dArray = function(stringArrayInput:string[]){
     return stringArray2d
 }
 
-// Creating all coordinate possibilites
+// Iterating through all elements
 const lookForX = function(stringArray2dInput:string[][]){
     let sum:number = 0;
     for(let i = 0; i < stringArray2dInput.length;i++){
@@ -39,14 +39,12 @@ const lookForX = function(stringArray2dInput:string[][]){
             // Check if iterated element is X and if it is then send it to check if it can move around
             if(stringArray2dInput[i][j] == "X"){ 
                 sum += lookWhereIsSpace(i,j,stringArray2dInput[i].length,stringArray2dInput.length,stringArray2dInput)
+                // console.log(i,j)
             }
-
         }
     }
     return sum;
 }
-
-
 const lookWhereIsSpace = function(y:number,x:number,xLength:number,yLength:number,array:string[][]){
 
     // if x <= 2 then it cannot look to the left.
@@ -101,7 +99,7 @@ const lookWhereIsSpace = function(y:number,x:number,xLength:number,yLength:numbe
 
 // Checking which ones can be valid so the word "XMAS" can possibly fit towards a certain direction
 const canGoLeft = function(x:number){
-    if(x<=2){
+    if(x<3){
         return false;
     }
     return true;
@@ -113,7 +111,7 @@ const canGoRight = function(x:number,xLength:number){
     return true;
 }
 const canGoUpwards = function(y:number){
-    if(y<=3){
+    if(y<3){
         return false;
     }
     return true;
@@ -147,7 +145,7 @@ const canGoRightDown = function(right:boolean,down:boolean){
         return true
     }
     return false;
-}
+} 
 
 // Checking if the following letters towards the valid paths are correct or not
 const goingLeft = function(y:number,x:number,array:string[][]){
@@ -207,7 +205,7 @@ const goingDownRight= function(y:number,x:number,array:string[][]){
     }
 }
 const goingDownLeft= function(y:number,x:number,array:string[][]){
-    if(array[y+1][x+1] === "M" && array[y+2][x+2] === "A" && array[y+3][x+3] === "S"){
+    if(array[y+1][x-1] === "M" && array[y+2][x-2] === "A" && array[y+3][x-3] === "S"){
         return 1
     }
     else{

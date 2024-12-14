@@ -23,10 +23,10 @@ MXMXAXMASX`
 // Day 3.2
 
 // const b = day3MainFunction2(input) 
-// console.log(b)
+// console.log(b) 
 
-// day 4.1
-const day04Result:number = day4MainFunction(exampleStringDay4)
+//day 4.1
+const day04Result:number = day4MainFunction(day04Input)
 console.log(day04Result) 
  
 
