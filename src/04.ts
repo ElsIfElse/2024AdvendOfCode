@@ -1,3 +1,10 @@
+// Day 4.1
+
+import { fail } from "assert";
+import { log } from "console";
+import { findSourceMap } from "module";
+import { stringify } from "querystring";
+
 export const day4MainFunction = function(stringInput:string){
     const stringArray:string[] =  makeStringIntoArray(stringInput);
     const stringArray2d:string[][] = makeStringArrayInto2dArray(stringArray);
@@ -212,3 +219,58 @@ const goingDownLeft= function(y:number,x:number,array:string[][]){
         return 0
     }
 }
+
+// Day 4.2
+
+export const day4MainFunction2 = function(inputString:string){
+    const array2D:string[] = inputString.split("\n")
+    const coordinates:number[][] = checkForLetters(array2D)
+    let result:number = isItValidX(coordinates,array2D)
+    
+    return result
+}
+const checkForLetters = function(stringArray:string[]){
+    let coordinates:number[][] = []
+
+    for(let i = 0; i < stringArray.length; i++){
+        for(let j = 0; j < stringArray[i].length; j++){
+            let coordPair:number[] = [i,j]
+            if(stringArray[i][j] == "A" 
+                && i > 0 
+                && i < stringArray.length -1
+                && j > 0 
+                && j < stringArray[i].length-1){
+                coordinates.push(coordPair) 
+            }
+        }
+    }
+    
+    return coordinates
+}
+const leftUpDownRight = function(y:number,x:number,stringArray:string[]){
+
+    if((stringArray[y+1][x-1] == "M" && stringArray[y-1][x+1]== "S") || (stringArray[y+1][x-1] == "S" && stringArray[y-1][x+1]== "M")){   
+
+        return true  
+    }       
+    return false
+}
+const rightUpDownLeft = function(y:number,x:number,stringArray:string[]){
+    if((stringArray[y+1][x+1] == "M" && stringArray[y-1][x-1]== "S") || (stringArray[y+1][x+1] == "S" && stringArray[y-1][x-1] == "M")){
+
+        return true
+    }
+    return false
+}
+const isItValidX = function(coordinates:number[][],array2D:string[]){
+    let result:number = 0;
+    for(let i = 0;i < coordinates.length; i++){
+        let a: boolean = leftUpDownRight(coordinates[i][0],coordinates[i][1],array2D)
+        let b: boolean = rightUpDownLeft(coordinates[i][0],coordinates[i][1],array2D)
+        if(a == true && b == true){
+            result += 1
+        }
+    }
+    return result
+}
+// i+1 j-1, i+1 j+1, i-1 j-1, i-1 j+1
